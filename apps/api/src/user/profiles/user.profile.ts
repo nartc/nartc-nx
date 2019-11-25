@@ -16,6 +16,10 @@ class UserProfile extends MappingProfileBase {
         opts => opts.mapFrom(s => s.firstName + ' ' + s.lastName)
       )
       .forMember(
+        d => d.roleName,
+        opts => opts.mapFrom(s => (s.role as Role).roleName)
+      )
+      .forMember(
         d => d.roleId,
         opts => opts.mapFrom(s => (s.role as Role).id)
       )

@@ -7,7 +7,7 @@ import {
 } from './decorators/swagger.decorators';
 import { ExposedProp } from './decorators/typegoose.decorators';
 
-export class BaseModel {
+export abstract class BaseModel {
   @ExposedProp()
   createdAt?: Date;
   @ExposedProp()
@@ -18,7 +18,7 @@ export class BaseModel {
   id?: string;
 
   static get schema(): Schema {
-    return buildSchema(this, {
+    return buildSchema(<any>this, {
       timestamps: true,
       toJSON: {
         getters: true,
@@ -33,7 +33,7 @@ export class BaseModel {
   }
 }
 
-export class BaseVm {
+export abstract class BaseVm {
   @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
   createdAt?: Date;
   @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
